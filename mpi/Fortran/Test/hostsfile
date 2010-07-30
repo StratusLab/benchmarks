@@ -1,0 +1,5 @@
+nebula-virt01
+nebula-virt02 slots=2
+nebula-virt03 slots=4
+nebula-virt04 slots=6
+nebula-virt05 slots=7

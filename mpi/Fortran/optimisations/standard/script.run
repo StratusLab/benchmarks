@@ -5,5 +5,5 @@ then
   echo "Usage ./script.run ThreadNb"
   exit
 else
-  mpirun --mca btl tcp,self --hostfile hostsfile  -np $1 --byslot Test | sort
+  mpirun --mca btl tcp,self -np $1 standard
 fi

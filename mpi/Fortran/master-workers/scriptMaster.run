@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export orte_base_help_aggregate=0
+
+
+if [ -z $1 ]
+then
+  echo "Usage ./script.run ThreadNb"
+  exit
+else
+  mpirun  --mca btl tcp,self --hostfile /home/oneadmin/benchmarks/hostsfile  -np $1  --byslot Master | sort
+fi

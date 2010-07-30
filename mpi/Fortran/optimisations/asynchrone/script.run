@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+  echo "Usage ./script.run ThreadNb"
+  exit
+else
+  mpirun --mca btl tcp,self --hostfile /home/oneadmin/benchmarks/hostsfile  -np $1  --byslot asynchrone | sort 
+fi
