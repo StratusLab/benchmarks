@@ -1,9 +1,0 @@
-#!/bin/bash
-export orte_base_help_aggregate=0
-if [ -z $1 ]
-then
-  echo "Usage ./script.run ThreadNb"
-  exit
-else
-  mpirun --mca btl tcp,self  -np $1 Client
-fi

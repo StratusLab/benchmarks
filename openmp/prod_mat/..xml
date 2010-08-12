@@ -1,0 +1,13 @@
+ <benchmark name='openmp_prod_mat'>
+     <parameters>
+        <nb_threads>7</nb_threads>
+        <matrix_dimension>
+           <rows>10</rows>
+           <columns>30</columns>
+        </matrix_dimension>
+     </parameters>
+     <results>
+       <elapsed_time unit='sec'> 0.000E+00</elapsed_time>
+       <cpu_time unit='sec'> 1.999E-03</cpu_time>
+     </results>
+ </benchmark>

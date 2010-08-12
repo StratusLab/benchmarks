@@ -1,0 +1,9 @@
+ <benchmark name='mpi_standard'>
+     <parameters>
+        <nb_threads>7</nb_threads>
+     </parameters>
+     <results>
+       <elapsed_time unit='sec'> 0.052</elapsed_time>
+       <cpu_time unit='sec'> 0.051</cpu_time>
+     </results>
+ </benchmark>

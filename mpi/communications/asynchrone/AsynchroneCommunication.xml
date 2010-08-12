@@ -1,0 +1,9 @@
+ <benchmark name='mpi_asynchrone'>
+     <parameters>
+        <nb_threads>2</nb_threads>
+     </parameters>
+     <results>
+       <elapsed_time unit='sec'>12.097</elapsed_time>
+       <cpu_time unit='sec'>12.074</cpu_time>
+     </results>
+ </benchmark>
