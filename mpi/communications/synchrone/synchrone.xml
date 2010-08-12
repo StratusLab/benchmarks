@@ -1,9 +1,0 @@
- <benchmark name='mpi_synchrone'>
-     <parameters>
-        <nb_threads>9</nb_threads>
-     </parameters>
-     <results>
-       <elapsed_time unit='sec'>68.469</elapsed_time>
-       <cpu_time unit='sec'>68.313</cpu_time>
-     </results>
- </benchmark>

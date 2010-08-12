@@ -1,9 +1,0 @@
-#!/bin/bash
-
-if [ -z $1 ]
-then
-  echo "Usage ./script.run ThreadNb"
-  exit
-else
-  mpirun --mca btl tcp,self --hostfile /var/one/var/benchmarks/hostsfile  -np $1  --byslot PersistentCommunication | sort 
-fi

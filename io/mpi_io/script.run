@@ -1,9 +1,0 @@
-#!/bin/bash
-if [ -z "$1" -o -z "$2" ];
-then
-  echo "Usage ./script.run ThreadNb filesize"
-  exit
-else
-  echo mpirun   -np $1 o_at $1 $2  
-  mpirun  -np $1 o_at $1 $2
-fi
