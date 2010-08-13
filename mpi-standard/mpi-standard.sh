@@ -2,8 +2,8 @@
 
 if [ -z $1 ]
 then
-  echo "Usage ./mpi-standard.sh ThreadNb"
+  echo "Usage /usr/libexec/mpi-standard.sh ThreadNb"
   exit
 else
-  mpirun --mca btl tcp,self   -np $1  --byslot mpi-standard | sort
+  mpirun --mca btl tcp,self   -np $1  --byslot /usr/libexec/mpi-standard | sort
 fi

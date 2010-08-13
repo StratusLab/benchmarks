@@ -2,8 +2,8 @@
 
 if [ -z $1 ]
 then
-  echo "Usage ./mpi-persistent.sh ThreadNb"
+  echo "Usage /usr/libexec/mpi-persistent.sh ThreadNb"
   exit
 else
-  mpirun --mca btl tcp,self  -np $1  --byslot mpi-persistent | sort 
+  mpirun --mca btl tcp,self  -np $1  --byslot /usr/libexec/mpi-persistent | sort 
 fi
