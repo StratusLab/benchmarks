@@ -1,4 +1,4 @@
-program CommunicationStandard
+program mpi_standard
  implicit none
  include 'mpif.h'
  integer, parameter                 :: na=256, nb=200,m=2048, etiquette=1111
@@ -12,9 +12,7 @@ program CommunicationStandard
  real(kind=8)                       :: initial_time,final_time,final_time_max,t_cpu_0, cpu_time_max, t_cpu_1, t_cpu
  character(len=30)::param,param1,param2,output_file
 
-  call getarg(0,param)
-  read(param,*)output_file
-  output_file=trim(output_file)//".xml"
+  output_file="mpi-standard.xml"
 
  call MPI_INIT(code)
  call MPI_COMM_SIZE(MPI_COMM_WORLD,nb_procs,code)
@@ -62,7 +60,7 @@ program CommunicationStandard
   close(10)
   endif 
  call MPI_FINALIZE(code)
-end program CommunicationStandard
+end program mpi_standard
 
 
 

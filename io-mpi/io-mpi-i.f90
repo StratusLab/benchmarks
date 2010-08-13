@@ -1,4 +1,4 @@
-program read_at
+program io_mpi_i
 
   implicit none
   include 'mpif.h'
@@ -20,9 +20,7 @@ program read_at
   call getarg(2,input_file)
   read(input_file,*)nb_value
 
-  call getarg(0,param)
-  read(param,*)xmloutput_file
-  xmloutput_file=trim(xmloutput_file)//".xml" 
+  xmloutput_file="io_mpi_i.xml" 
 
  
   call mpi_init(code)
@@ -55,9 +53,6 @@ program read_at
   t_cpu = t_cpu_1 - t_cpu_0
   call MPI_REDUCE(final_time,final_time_max,1,MPI_DOUBLE_PRECISION,MPI_MAX,0,MPI_COMM_WORLD,code)
   call MPI_REDUCE(t_cpu,cpu_time_max,1,MPI_DOUBLE_PRECISION,MPI_MAX,0,MPI_COMM_WORLD,code)
-  print*, "cpu_time_max=",cpu_time_max
-  print*, "final_time_max=",final_time_max
-  print*, "rank=", rank
  if (rank == 0) then
    print('("Elapsed time  : ",F6.3," seconds")'), final_time_max
    print('("CPU time  : ",F6.3," seconds")'), cpu_time_max
@@ -87,4 +82,4 @@ program read_at
 
   call mpi_finalize(code)
 
-end program read_at
+end program io_mpi_i

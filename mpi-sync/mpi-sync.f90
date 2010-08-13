@@ -1,4 +1,4 @@
-program CommunicationSynchrone
+program mpi_sync
  implicit none
  include 'mpif.h'
  integer, parameter                 :: na=2256, nb=2200,m=13048, tag=1111
@@ -12,10 +12,7 @@ program CommunicationSynchrone
  real(kind=8)                       :: initial_time,final_time,final_time_max,t_cpu_0, cpu_time_max, t_cpu_1, t_cpu
  character(len=20)::param,param1,param2,output_file
 
-  !call getarg(0,param)
-  !read(param,*)output_file
-  !output_file=trim(output_file)//".xml"
-   output_file="CommunicationSynchrone.xml"  
+   output_file="mpi-sync.xml"  
  call MPI_INIT(code)
  call MPI_COMM_SIZE(MPI_COMM_WORLD,nb_procs,code)
  call MPI_COMM_RANK(MPI_COMM_WORLD,rank,code)
@@ -75,4 +72,4 @@ program CommunicationSynchrone
 
  call MPI_FINALIZE(code)
 
-end program CommunicationSynchrone
+end program mpi_sync

@@ -19,9 +19,7 @@ program prod_mat
   
 
 
-  call getarg(0,param)
-  read(param,*)output_file
-  output_file=trim(output_file)//".xml"
+  output_file="openmp-matrix.xml"
   print*, 'output_file=',output_file
      
   call getarg(1,param)

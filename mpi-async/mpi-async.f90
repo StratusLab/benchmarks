@@ -1,4 +1,4 @@
-program CommunicationAsynchrone
+program mpi_standard
  implicit none
  include 'mpif.h'
  integer, parameter                 :: na=1956,nb=900,m=9048,tag=911
@@ -10,11 +10,9 @@ program CommunicationAsynchrone
  integer                            :: nb_procs,rank,code,info,rcode
  integer, dimension(MPI_STATUS_SIZE):: statut
  real(kind=8)                       :: initial_time,final_time,final_time_max,t_cpu_0, cpu_time_max, t_cpu_1, t_cpu
- character(len=30)::param,param1,param2,output_file
+ character(len=20)::param,param1,param2,output_file
 
-  call getarg(0,param)
-  read(param,*)output_file
-  output_file=trim(output_file)//".xml"
+  output_file="mpi-standard.xml"
 
 
  call MPI_INIT(code)
@@ -66,4 +64,4 @@ program CommunicationAsynchrone
   endif
 
  call MPI_FINALIZE(code)
-end program CommunicationAsynchrone
+end program mpi_standard

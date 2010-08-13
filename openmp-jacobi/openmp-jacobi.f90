@@ -13,9 +13,7 @@ program jacobi
   character(len=20)::param,param1,param2,output_file
   !$ integer                     :: nb_tasks
   
-  call getarg(0,param)
-  read(param,*)output_file
-  output_file=trim(output_file)//".xml"
+  output_file="openmp-jacobi.xml"
   print*, 'output_file=',output_file
 
   call getarg(1,param1)

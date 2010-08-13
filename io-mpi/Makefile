@@ -27,4 +27,4 @@ io-mpi-i : io-mpi-i.f90
 io-mpi-io :  io-mpi-io.f90
 	$(FC) $(FCFLAGS) $^ -o bin/$@
 clean :
-	rm -rf bin$(OBJS) 
+	rm -rf bin $(OBJS) 

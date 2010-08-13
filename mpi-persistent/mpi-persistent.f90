@@ -1,4 +1,4 @@
-program CommunicationPersistent
+program mpi_persistent
  implicit none
  include 'mpif.h'
  integer, parameter                 :: na=2256,nb=2200,m=22048,tag=1111
@@ -15,9 +15,7 @@ program CommunicationPersistent
                                        t_cpu_1, t_cpu
  character(len=30)::param,param1,param2,output_file
  
-  call getarg(0,param)
-  read(param,*)output_file
-  output_file=trim(output_file)//".xml"
+  output_file="mpi-persistent.xml"
 
 
  call MPI_INIT(code)
@@ -122,4 +120,4 @@ program CommunicationPersistent
   endif 
 
  call MPI_FINALIZE(code)
-end program CommunicationPersistent
+end program mpi_persistent
