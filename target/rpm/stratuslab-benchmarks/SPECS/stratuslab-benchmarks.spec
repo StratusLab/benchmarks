@@ -1,6 +1,6 @@
 Name: stratuslab-benchmarks
 Version: 1.0
-Release: 0.20100813.093805
+Release: 0.20100813.122622
 Summary: StratusLab Benchmarks
 License: Apache
 Vendor: StratusLab
@@ -26,6 +26,7 @@ fi
 
 %files
 
+%attr(755,root,root) /usr/libexec/cpu_intensive
 %attr(755,root,root) /usr/libexec/mpi-standard
 %attr(755,root,root) /usr/libexec/mpi-sync
 %attr(755,root,root) /usr/libexec/io-mpi-io
@@ -46,6 +47,7 @@ fi
 %attr(755,root,root) /usr/bin/kepler_install.sh
 %attr(755,root,root) /usr/bin/mpi-sync.sh
 %attr(755,root,root) /usr/bin/kepler-nogui.sh
+%attr(755,root,root) /usr/bin/cpu_intensive.sh
 %attr(755,root,root) /usr/bin/mpi-standard.sh
 %attr(755,root,root) /usr/bin/mpi-persistent.sh
 %attr(755,root,root) /usr/bin/openmp-jacobi.sh
