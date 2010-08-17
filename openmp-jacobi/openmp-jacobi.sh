@@ -1,14 +1,14 @@
 #!/bin/bash
 if [ -z "$1" ];
 then
-  echo "Usage /usr/libexec/openmp-jacobi.sh rowsNb"
+  echo "Usage /usr/libexec/openmp-jacobi.sh ThreadNb"
   exit
-else
-export PATH=.:$PATH
+fi
+
 # Sequential Execution 
-/usr/libexec/openmp-jacobi_seq $1
+/usr/libexec/openmp-jacobi_seq 
 
 # Parallel Execution : 8 threads
-export OMP_NUM_THREADS=8
-/usr/libexec/openmp-jacobi_para $1
-fi
+export OMP_NUM_THREADS=$1
+/usr/libexec/openmp-jacobi_para 
+

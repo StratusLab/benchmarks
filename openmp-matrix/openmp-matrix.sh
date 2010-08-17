@@ -1,14 +1,14 @@
 #!/bin/bash
-if [ -z "$1" -o -z "$2" ];
+if [ -z "$1" ];
 then
-  echo "Usage /usr/libexec/openmp-matrix.sh rowsNb columnsNb"
+  echo "Usage /usr/libexec/openmp-matrix.sh ThreadNb"
   exit
-else
-export PATH=.:$PATH
+fi
+
 # Sequential Execution
-/usr/libexec/openmp-matrix_seq $1 $2
+/usr/libexec/openmp-matrix_seq 
 
 # Parallel execution 8 threads
-export OMP_NUM_THREADS=8
-/usr/libexec/openmp-matrix_para  $1 $2
-fi
+export OMP_NUM_THREADS=$1
+/usr/libexec/openmp-matrix_para  
+

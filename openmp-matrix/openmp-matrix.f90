@@ -2,10 +2,11 @@ program prod_mat
 !$ use OMP_LIB
   implicit none
 
-  integer:: m, n
-  real(kind=8), pointer:: a(:,:)
-  real(kind=8), pointer:: b(:,:)
-  real(kind=8), pointer:: c(:,:)
+  
+  integer, parameter           :: m=701, n=801
+  real(kind=8), dimension(m,n) :: a
+  real(kind=8), dimension(n,m) :: b
+  real(kind=8), dimension(m,m) :: c
   integer                      :: i, j, k, ir, t1, t2
   real                         :: time, t_cpu_0, t_cpu_1, t_cpu
   character(len=20)::param,param1,param2,output_file
@@ -20,15 +21,7 @@ program prod_mat
 
 
   output_file="openmp-matrix.xml"
-  print*, 'output_file=',output_file
      
-  call getarg(1,param)
-  read(param,*)m
-  call getarg(2,param)
-  read(param,*)n
-  allocate(a(m,n))
-  allocate(b(n,m))
-  allocate(c(m,m))
 
 
   ! Initial CPU Time 
@@ -86,7 +79,7 @@ program prod_mat
 
 
  ! Store results in XML File
-
+  print*, 'output_file=',output_file
   write(param,*) m
   write(param1,*) n
   !$ write(param2,*) nb_tasks  
@@ -111,7 +104,4 @@ program prod_mat
            & 3X,"CPU time           : ",1PE10.3," sec.",/, &
            & 3X,"partial result    : ",2(1PE10.3,1X)," ... ",2(1PE10.3,1X),//)', &
            m,n,time,t_cpu,c(2,2),c(3,3),c(m-2,m-2),c(m-1,m-1)
-  deallocate(a)
-  deallocate(b)
-  deallocate(c)
 end program prod_mat

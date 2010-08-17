@@ -4,10 +4,11 @@ program gradient_conjuguate
 
 ! Default Matrix dimension 
 
-  integer                      :: n
+
+  integer, parameter           :: n=4201
   integer                      :: i, j, ir, t0, t1, iteration=0
-  real(kind=8), pointer::a(:,:)
-  real(kind=8), pointer::x(:), b(:), pr(:), z(:), r(:), p(:), q(:)
+  real(kind=8), dimension(n,n) :: a
+  real(kind=8), dimension(n)   :: x, b, pr, z, r, p, q
   real(kind=8)                 :: norm, rho, rho_old, alpha, beta, gamma
   real                         :: time, t_cpu_0, t_cpu_1, t_cpu
   character(len=20)::param,param1,param2,output_file
@@ -17,20 +18,9 @@ program gradient_conjuguate
   
 
   output_file="openmp-cg.xml"
-  print*, 'output_file=',output_file
   
-  call getarg(1,param)
-  read(param,*)n
  
 
-  allocate(a(n,n))
-  allocate(b(n))
-  allocate(x(n)) 
-  allocate(pr(n))
-  allocate(z(n)) 
-  allocate(r(n))
-  allocate(p(n))   
-  allocate(q(n))
 
 
 
@@ -138,6 +128,8 @@ program gradient_conjuguate
   
 
   ! Store results in XML File
+  
+  print*, 'output_file=',output_file
   write(param,*) iteration
   write(param1,*) n
   !$ write(param2,*) nb_tasks  
@@ -160,12 +152,4 @@ program gradient_conjuguate
            &,3X,"residu     : ",1PE10.3,/  &
            &,3X,"elapsed time      : ",1PE10.3," sec.",/ &
            &,3X,"CPU time          : ",1PE10.3," sec.",//)',n,iteration,norm,time,t_cpu
-  deallocate(a)
-  deallocate(b)
-  deallocate(x)  
-  deallocate(pr)
-  deallocate(z)
-  deallocate(r)
-  deallocate(p)
-  deallocate(q)
 end program gradient_conjuguate

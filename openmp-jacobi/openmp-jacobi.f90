@@ -4,28 +4,22 @@ program jacobi
 
 ! Default Matrix Dimension 
 
-  integer, parameter           :: diag=800
-  integer                      :: n, i, j, ir, t0, t1, iteration=0
-  real(kind=8),  pointer:: a(:,:) 
-  real(kind=8), pointer:: x(:), x_current(:), b(:)
+  integer, parameter           :: n=1201, diag=800
+  integer                      :: i, j, ir, t0, t1, iteration=0
+  real(kind=8), dimension(n,n) :: a
+  real(kind=8), dimension(n)   :: x, x_current, b
+  real(kind=8)                 :: norme
   real(kind=8)                 :: norm
   real                         :: time, t_cpu_0, t_cpu_1, t_cpu
   character(len=20)::param,param1,param2,output_file
   !$ integer                     :: nb_tasks
   
   output_file="openmp-jacobi.xml"
-  print*, 'output_file=',output_file
 
-  call getarg(1,param1)
-  read(param1,*)n
    
   
  
 
-  allocate(a(n,n))
-  allocate(x(n))
-  allocate(x_current(n))
-  allocate(b(n))
 
 
   !$OMP PARALLEL
@@ -83,6 +77,8 @@ program jacobi
 
 
   ! Store results in XML File
+
+  print*, 'output_file=',output_file
   write(param,*) iteration
   write(param1,*) n
   !$ write(param2,*) nb_tasks  
@@ -105,9 +101,5 @@ program jacobi
            &,3X,"Norm               : ",1PE10.3,/  &
            &,3X,"Elapsed Time      : ",1PE10.3," sec.",/ &
            &,3X,"CPU Time          : ",1PE10.3," sec.",//)',n,iteration,norm,time,t_cpu
-  deallocate(a)
-  deallocate(b)
-  deallocate(x)
-  deallocate(x_current)
 
 end program jacobi
