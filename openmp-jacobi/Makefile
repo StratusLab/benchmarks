@@ -16,9 +16,9 @@ SRC     = openmp-jacobi.f90
 OBJ     = openmp-jacobi.o
 
 
-all:    openmp-jacob_seq openmp-jacobi_para
+all:    openmp-jacobi_seq openmp-jacobi_para
 
-openmp-jacob_seq: openmp-jacobi.f90 
+openmp-jacobi_seq: openmp-jacobi.f90 
 	mkdir -p bin
 	$(FCS) $(FFLAGS) $^ -o bin/$@
 
