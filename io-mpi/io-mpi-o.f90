@@ -33,7 +33,7 @@ program io_mp_io
   call mpi_type_size(MPI_INTEGER,nb_bytes_integer,code)
   nb_values2 = nb_value2*1E6/(nb_proc*nb_bytes_integer) + 1
   
-
+  
   allocate(values2(nb_values2))
   values2(:)= (/(i+rank*100,i=1,nb_values2)/)
   
@@ -44,7 +44,6 @@ program io_mp_io
   call mpi_type_size(MPI_INTEGER,nb_bytes_integer,code)
 
   position_file2=rank*nb_values2*nb_bytes_integer
- 
   call mpi_file_write_at(fh2,position_file2,values2,nb_values2, &
                          MPI_INTEGER,statut,code)
   call mpi_file_close(fh2,code)

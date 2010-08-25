@@ -25,7 +25,7 @@ io-bonnie++: io-bonnie++.cpp $(BONOBJS)
 
 zcav: zcav.cpp $(ZCAVOBJS)
 	$(CXX) zcav.cpp -o bin/zcav $(ZCAVOBJS) $(LFLAGS)
-
+	rm -f *.o
 %.o: %.cpp %.h bonnie.h port.h
 	$(CXX) -c $<
 

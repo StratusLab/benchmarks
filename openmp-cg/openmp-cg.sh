@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$1" ];
 then
-  echo "Usage /usr/libexec/openmp-cg.sh ThreadNb"
+  echo "Usage /usr/bin/openmp-cg.sh ThreadNb"
   exit
 fi
 

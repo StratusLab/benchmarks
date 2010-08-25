@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -z $1 ]
+if [ -z $1 -o -z $2 ]
 then
-  echo "Usage /usr/libexec/mpi-persistent.sh ThreadNb"
+  echo "Usage /usr/bin/mpi-persistent.sh hostfile ThreadNb"
   exit
 fi
-  mpirun --mca btl tcp,self  -np $1  --byslot /usr/libexec/mpi-persistent | sort 
+  mpirun --mca btl tcp,self  --hostfile $1 -np $2  /usr/libexec/mpi-persistent 
