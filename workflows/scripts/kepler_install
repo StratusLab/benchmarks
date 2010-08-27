@@ -22,5 +22,5 @@ cd build-area
 
 $ANT_HOME/apache-ant-${ANT_VERSION}/bin/ant  change-to -Dsuite=kepler-${KEPLER_VERSION}
 
-
+export PATH=$ANT_HOME/apache-ant-${ANT_VERSION}/bin/ant:$PATH
 
