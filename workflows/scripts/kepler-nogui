@@ -12,7 +12,6 @@ if [ -z "$1" ]; then
 fi
 
 echo "Kepler download and Install"
-. kepler_install
 #ANT DOWNLOAD
 [ ! -f ${ANT_HOME}/apache-ant-${ANT_VERSION}-bin.zip ] && wget http://mir2.ovh.net/ftp.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.zip
 
