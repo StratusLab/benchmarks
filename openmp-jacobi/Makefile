@@ -11,18 +11,14 @@ CCFLAGS = -g
 FFLAGS = -g
 FCFLAGS = -g
 
-CMD     = openmp-jacobi
-SRC     = openmp-jacobi.f90
-OBJ     = openmp-jacobi.o
-
 
 all:    openmp-jacobi_seq openmp-jacobi_para
 
-openmp-jacobi_seq: openmp-jacobi.f90 
+openmp-jacobi_seq: src/openmp-jacobi.f90 
 	mkdir -p bin
 	$(FCS) $(FFLAGS) $^ -o bin/$@
 
-openmp-jacobi_para: openmp-jacobi.f90
+openmp-jacobi_para: src/openmp-jacobi.f90
 	$(FC) $(FFLAGS) $^ -o bin/$@
 
 clean:

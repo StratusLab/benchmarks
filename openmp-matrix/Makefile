@@ -11,17 +11,13 @@ CCFLAGS = -g
 FFLAGS = -g
 FCFLAGS = -g
 
-CMD     = openmp-matrix
-SRC     = openmp-matrix.f90
-OBJ     = openmp-matrix.o
-
 
 all:    openmp-matrix_seq openmp-matrix_para
 
-openmp-matrix_seq: openmp-matrix.f90   
+openmp-matrix_seq: src/openmp-matrix.f90   
 	mkdir -p bin
 	$(FCS) $(FFLAGS) $^ -o bin/$@
-openmp-matrix_para: openmp-matrix.f90 
+openmp-matrix_para: src/openmp-matrix.f90 
 	$(FC) $(FFLAGS) $^ -o bin/$@ 
 
 clean:

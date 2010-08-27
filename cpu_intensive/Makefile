@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -g -O2
 
 
-all: cpu_intensive
+all: cpu_stress
 
-cpu_intensive: cpu_intensive.c
+cpu_stress: src/cpu_intensive.c
 	mkdir -p bin 
 	$(CC)  -o bin/$@ $^
 clean:

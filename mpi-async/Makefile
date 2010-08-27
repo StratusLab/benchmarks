@@ -17,9 +17,9 @@ LDFLAGS = -L/usr/lib64 -llapack
 
 OBJS = mpi-async.o
 
-all:	mpi-async
+all:	mpi-asynchronous
 
-mpi-async : mpi-async.f90
+mpi-asynchronous : src/mpi-async.f90
 	mkdir -p bin	
 	$(FC) $(FCFLAGS) $^ -o bin/$@ $(LDFLAGS)
 

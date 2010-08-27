@@ -17,9 +17,9 @@ LDFLAGS = -L/usr/lib64 -llapack
 
 OBJS = mpi-persistent.o
 
-all:	mpi-persistent
+all:	mpi-persi
 
-mpi-persistent : mpi-persistent.f90
+mpi-persi : src/mpi-persistent.f90
 	mkdir -p bin
 	$(FC) $(FCFLAGS) $^ -o bin/$@ $(LDFLAGS)
 

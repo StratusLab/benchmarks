@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -z $1 -o -z $2 ]; then
+  echo "Usage /usr/bin/io-mpi-i  ThreadNb Inputfile_size(Mbytes)  "
+  exit -1
+fi  
+mpirun --mca btl tcp,self -np  $1  /usr/libexec/io-i $1 $2 

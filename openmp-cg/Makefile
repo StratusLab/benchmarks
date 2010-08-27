@@ -11,18 +11,15 @@ CCFLAGS = -g
 FFLAGS = -g
 FCFLAGS = -g
 
-CMD     = openmp-cg
-SRC     = openmp-cg.f90
-OBJ     = openmp-cg.o
 
 all:    openmp-cg_seq openmp-cg_para
 
 
-openmp-cg_seq: openmp-cg.f90
+openmp-cg_seq: src/openmp-cg.f90
 	mkdir -p bin
 	$(FFC) $(LDFLAGS) $^ -o bin/$@
 
-openmp-cg_para: openmp-cg.f90 
+openmp-cg_para: src/openmp-cg.f90 
 	$(FFC) $(LDFLAGS) $^ -o bin/$@
 
 clean:

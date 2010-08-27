@@ -17,9 +17,9 @@ LDFLAGS = -L/usr/lib64 -llapack
 
 OBJS = mpi-standard.o
 
-all:	mpi-standard
+all:	mpi-stand
 
-mpi-standard : mpi-standard.f90
+mpi-stand : src/mpi-standard.f90
 	mkdir -p bin
 	$(FC) $(FCFLAGS) $^ -o bin/$@ $(LDFLAGS)
 
