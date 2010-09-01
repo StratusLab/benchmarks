@@ -20,7 +20,7 @@ openmp-cg_seq: src/openmp-cg.f90
 	$(FFC) $(LDFLAGS) $^ -o bin/$@
 
 openmp-cg_para: src/openmp-cg.f90 
-	$(FFC) $(LDFLAGS) $^ -o bin/$@
+	$(FC) $(LDFLAGS) $^ -o bin/$@
 
 clean:
 	rm -rf bin *.o 
