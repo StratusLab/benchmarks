@@ -2,7 +2,7 @@
 
 if [ -z $1 -o -z $2 -o -z $3 ]
 then
-  echo "Usage /usr/bin/io-mpi-io ThreadNb Inputfile_size(Mbytes) Outputfile_size(Mbytes) "
+  echo "Usage /usr/bin/io_mpi_io ThreadNb Inputfile_size(Mbytes) Outputfile_size(Mbytes) "
   exit
 fi  
 

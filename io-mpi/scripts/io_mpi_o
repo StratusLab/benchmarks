@@ -2,7 +2,7 @@
 
 if [ -z "$1" -o -z "$2" ]
 then
-  echo "Usage /usr/bin/io-mpi-o  ThreadNb Outputfile_size(Mbytes) ) "
+  echo "Usage /usr/bin/io_mpi_o  ThreadNb Outputfile_size(Mbytes) ) "
   exit
 fi  
 mpirun --mca btl tcp,self  -np $1 /usr/libexec/io-o $1 $2   

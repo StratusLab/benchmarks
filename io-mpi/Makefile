@@ -14,17 +14,17 @@ FCFLAGS = -g
 
 
 
-OBJS = io-mpi-o.o io-mpi-i.o io-mpi-io.o
+OBJS = io_mpi_o.o io_mpi_i.o io_mpi_io.o
 
 all:	io-o io-i io-io
 
-io-o : src/io-mpi-o.f90
+io-o : src/io_mpi_o.f90
 	mkdir -p bin
 	$(FC) $(FCFLAGS) $^ -o bin/$@
 
-io-i : src/io-mpi-i.f90
+io-i : src/io_mpi_i.f90
 	$(FC) $(FCFLAGS) $^ -o bin/$@
-io-io :  src/io-mpi-io.f90
+io-io :  src/io_mpi_io.f90
 	$(FC) $(FCFLAGS) $^ -o bin/$@
 clean :
 	rm -rf bin $(OBJS) 

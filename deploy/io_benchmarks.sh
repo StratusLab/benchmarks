@@ -45,46 +45,7 @@ done
 
 [ -z "$INPUT_FILE" -o -z "$OUTPUT_FILE" -o -z "$Executable" -o -z "$CPU" -o -z "$MEMORY" ] && Usage
 
-
-function check_vm_status()
-{   
-    LIMIT_TIME=600
-    INITIAL_TIME=`date +%s`
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    
-    VM_STATUS=`onevm show $VM_NAME | grep "LCM_STATE" | awk '{print $3}'`
-    while [ "$VM_STATUS" != "RUNNING" -a "$VM_STATUS" != "FAILED" ] && [ $TEST_TIME -lt $LIMIT_TIME ]; do
-    VM_STATUS=`onevm show $VM_NAME | grep "LCM_STATE" | awk '{print $3}'`
-    echo "VM $VM_NAME Status : $VM_STATUS"
-    sleep 30
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    done
-}
-
-
-function check_vm_network()
-{
-    LIMIT_TIME=300
-    INITIAL_TIME=`date +%s`
-
-    CURRENT_TIME=`date +%s`
-    VM_CONNECTION_STATUS=`ping -w 20  $IPADDRESS | grep $IPADDRESS  | wc -l`
-    if [ -z "$VM_CONNECTION_STATUS" ]; then
-        echo "Unable to connect to  VM!"
-        exit -1
-    fi
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    while [ "$VM_CONNECTION_STATUS" == 2 ] &&  [ $TEST_TIME -lt $LIMIT_TIME ]; do
-    VM_CONNECTION_STATUS=`ping -w 20  $IPADDRESS | grep $IPADDRESS  | wc -l`
-    sleep 30
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    done
-}
-
-
+. bench_commons.sh
 
 
 VM_NAME=io-$CPU
@@ -93,45 +54,60 @@ RESULTS=/home/oneadmin/results
 
 
 
+# Create VM template
 
-sed -e "s|VMNAME|$VM_NAME|g" -e "s|NBVCPU|$CPU|g" -e "s|NBCPU|$CPU|g" -e "s|TMEMORY|$MEMORY|g" vm-template > vm-template-$VM_NAME
+vm_template $VM_NAME $CPU $MEMORY
 
-onevm submit vm-template-$VM_NAME
+# Submit VM
 
-IPADDRESS=`onevm show $VM_NAME | grep "IP" | cut -f2 -d"=" | cut -f1 -d","`
+vm_submit $VM_NAME
+
+#Get IPADDRESS Of VM
+
+ipaddress_vm $VM_NAME
+
+
 echo "IPADDRESS=$IPADDRESS"
 
 echo "Checking Virtual Machine Status"
 
-check_vm_status
-if [ $VM_STATUS != "RUNNING" ]; then
+check_vm_status $VM_NAME 600
+
+if [ ${VM_STATUS[1]} != "RUNNING" ]; then
 echo "Unable to start VM!"
 exit -1
 fi
 
 echo "Checking Virtual Machine Network"
 
-check_vm_network
+check_vm_network $IPADDRESS 300
 if  [ $VM_CONNECTION_STATUS == "2" ]; then
 echo "Unable to reach VM!"
 exit -1
 fi
 
-sleep 60
+
+
+
 
 #I/O Bench
 
-scp stratuslab.repo root@${IPADDRESS}:/etc/yum.repos.d
-ssh root@${IPADDRESS} yum install -y  stratuslab-benchmarks
+#Benchmarks install from stratuslab yum repository
+
+stratuslab_repo ${IPADDRESS} 
+
+#Run benchmarks
 
 echo "run $Executable  benchmark"
 
-ssh root@${IPADDRESS} $Executable $CPU $INPUT_FILE $OUTPUT_FILE
+run_benchmarks $IPADDRESS $Executable $CPU $INPUT_FILE $OUTPUT_FILE
 
 echo "retrieving $Executable  benchmark results"
 
-scp root@${IPADDRESS}:/root/$Executable.xml $RESULTS
+#Get Outputs
 
-#onevm delete $VM_NAME
-rm vm-template-$VM_NAME
+get_output ${IPADDRESS} $Executable $RESULTS
 
+#clean
+
+clean $VM_NAME

@@ -44,68 +44,46 @@ done
 echo "Workflow=$Workflow"
 
 
-function check_vm_status()
-{
-    LIMIT_TIME=600
-    INITIAL_TIME=`date +%s`
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-
-    VM_STATUS=`onevm show $VM_NAME | grep "LCM_STATE" | awk '{print $3}'`
-    while [ "$VM_STATUS" != "RUNNING" -a "$VM_STATUS" != "FAILED" ] && [ $TEST_TIME -lt $LIMIT_TIME ]; do
-    VM_STATUS=`onevm show $VM_NAME | grep "LCM_STATE" | awk '{print $3}'`
-    echo "VM $VM_NAME Status : $VM_STATUS"
-    sleep 30
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    done
-}
-
-
-function check_vm_network()
-{
-    LIMIT_TIME=300
-    INITIAL_TIME=`date +%s`
-
-    CURRENT_TIME=`date +%s`
-    VM_CONNECTION_STATUS=`ping -w 20  $IPADDRESS | grep $IPADDRESS  | wc -l`
-    if [ -z "$VM_CONNECTION_STATUS" ]; then
-        echo "Unable to connect to  VM!"
-        exit -1
-    fi
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    while [ "$VM_CONNECTION_STATUS" == 2 ] &&  [ $TEST_TIME -lt $LIMIT_TIME ]; do
-    VM_CONNECTION_STATUS=`ping -w 20  $IPADDRESS | grep $IPADDRESS  | wc -l`
-    sleep 30
-    CURRENT_TIME=`date +%s`
-    let "TEST_TIME = $CURRENT_TIME - $INITIAL_TIME"
-    done
-}
 
 
 
 VM_NAME=workflow-bench$CPU
 RESULTS=/srv/cloud/one/results
 
+. bench_commons.sh
 
-sed -e "s|VMNAME|$VM_NAME|g" -e "s|NBVCPU|$CPU|g" -e "s|NBCPU|$CPU|g" -e "s|TMEMORY|$MEMORY|g" vm-template > vm-template-$VM_NAME
 
-onevm submit vm-template-$VM_NAME
+# Create VM template
 
-IPADDRESS=`onevm show $VM_NAME | grep "IP" | cut -f2 -d"=" | cut -f1 -d","`
+vm_template $VM_NAME $CPU $MEMORY
+
+# Submit VM
+
+vm_submit $VM_NAME
+
+#Get IPADDRESS Of VM
+
+ipaddress_vm $VM_NAME
+
 echo "IPADDRESS=$IPADDRESS"
+
+
+#Check Virtual Machine Status
 
 echo "Checking Virtual Machine Status"
 
-check_vm_status
-if [ $VM_STATUS != "RUNNING" ]; then
+check_vm_status $VM_NAME 600
+if [ ${VM_STATUS[1]} != "RUNNING" ]; then
 echo "Unable to start VM!"
 exit -1
 fi
 
+#Check Virtual Machine Network
+
 echo "Checking Virtual Machine Network"
 
-check_vm_network
+check_vm_network $IPADDRESS 300
+
 if  [ $VM_CONNECTION_STATUS == "2" ]; then
 echo "Unable to reach VM!"
 exit -1
@@ -113,26 +91,29 @@ fi
 
 
 
-scp stratuslab.repo root@${IPADDRESS}:/etc/yum.repos.d
-ssh root@${IPADDRESS} yum install -y  stratuslab-benchmarks
-
 #Workflow Bench
 
+#Benchmarks install from stratuslab yum repository
 
+stratuslab_repo ${IPADDRESS}
 
 echo "copying $Workflow"
 
-scp $Workflow root@${IPADDRESS}:
+copy_file ${IPADDRESS} $Workflow
 
 echo "run $Executable  benchmark"
 
-ssh root@${IPADDRESS} $Executable /root/${Workflow##*/}
+run_benchmarks $IPADDRESS $Executable /root/${Workflow##*/}
 
 echo "retrieving $Executable  benchmark results"
 
-#scp root@${IPADDRESS}:/root/$Executable.xml $RESULTS
+#Get Outputs 
+echo "retrieving $Executable  benchmark results"
 
-#onevm delete $VM_NAME
-rm vm-template-$VM_NAME
+#get_output ${IPADDRESS} $Executable $RESULTS
+
+#Clean
+
+clean $VM_NAME
 
 
