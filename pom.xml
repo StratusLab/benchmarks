@@ -85,8 +85,8 @@
 	  <requires>
 	    <require>openmpi</require>
 	  </requires>
-	  <needarch>x86_64</needarch>
-	  <description>
+	  <buildarch>noarch</buildarch>  
+	<description>
 This package contains a series of StratusLab benchmarks used to determine
 the performance of virtualized resources using representative applications.
 	  </description>
