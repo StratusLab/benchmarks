@@ -43,9 +43,12 @@ done
 
 . bench_commons.sh
 
-VM_NAME=cpu_bench$CPU
-RESULTS=/srv/cloud/one/results
+logfile $Executable $PWD
 
+
+
+VM_NAME=cpu_bench$CPU
+RESULTS=$PWD/Outputs/$Executable-$$
 
 
 # Create VM template

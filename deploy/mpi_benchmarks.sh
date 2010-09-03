@@ -9,7 +9,7 @@ Executable : mpi-async, mpi-sync, mpi-persistent or mpi-standard.
 CPUNb : Number of CPU to use
 MemorySize : Amount of Memory to use (Mbytes)
 
-Example : openmp_benchmarks -e mpi-sync  -c 3 -m 3000
+Example : mpi_benchmarks -e mpi-sync  -c 3 -m 3000
 "
 
 exit -1
@@ -38,7 +38,12 @@ done
 
 . bench_mpi_inc.sh
 
+logfile $Executable $PWD
 
+
+BENCHMARK_NAME=$Executable
+VM_NAME=mpi$CPU
+RESULTS=$PWD/Outputs/$Executable-$$
 
 echo "MEMORY=$MEMORY"
 echo "CPU=$CPU"
@@ -50,10 +55,6 @@ echo "Executable=$Executable"
 
 
 
-BENCHMARK_NAME=$Executable 
-VM_NAME=mpi$CPU
-
-RESULTS=/home/oneadmin/results
 
 
 IP_ARRAY=();

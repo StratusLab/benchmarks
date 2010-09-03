@@ -47,10 +47,13 @@ echo "Workflow=$Workflow"
 
 
 
-VM_NAME=workflow-bench$CPU
-RESULTS=/srv/cloud/one/results
 
 . bench_commons.sh
+
+logfile $Executable $PWD
+
+VM_NAME=workflow-bench$CPU
+RESULTS=$PWD/Outputs/$Executable-$$
 
 
 # Create VM template
@@ -110,7 +113,7 @@ echo "retrieving $Executable  benchmark results"
 #Get Outputs 
 echo "retrieving $Executable  benchmark results"
 
-#get_output ${IPADDRESS} $Executable $RESULTS
+get_output ${IPADDRESS} $Executable $RESULTS
 
 #Clean
 

@@ -6,13 +6,13 @@ echo "Usage : io_benchmarks.sh -e Executable -c CPUNb -m MemorySize(Mbytes) -i i
 
 echo "where :
 
-Executable : io-mpi-io
+Executable : io_mpi_io
 CPUNb : Number of CPU to use
 MemorySize : Amount of Memory to use in Mbytes
 Inputfile_size :  size of the input file in Mbytes
 Outputfile_size :  size of the outputfile in Mbytes
 
-Example : io_benchmarks -e io-mpi-io  -c 3 -m 3000  -i 100 -o 1000
+Example : io_benchmarks -e io_mpi_io  -c 3 -m 3000  -i 100 -o 1000
 "
 
 exit -1
@@ -45,12 +45,16 @@ done
 
 [ -z "$INPUT_FILE" -o -z "$OUTPUT_FILE" -o -z "$Executable" -o -z "$CPU" -o -z "$MEMORY" ] && Usage
 
+
+
 . bench_commons.sh
 
 
-VM_NAME=io-$CPU
-RESULTS=/home/oneadmin/results
+logfile $Executable $PWD
 
+
+VM_NAME=io-$CPU
+RESULTS=$PWD/Outputs/$Executable-$$
 
 
 

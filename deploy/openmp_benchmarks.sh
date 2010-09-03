@@ -41,13 +41,15 @@ done
 
 [ -z "$ThreadNb" -o -z "$Executable" -o -z "$CPU" -o -z "$MEMORY" ] && Usage
 
+
+
 . bench_commons.sh
 
-
+logfile $Executable $PWD
 
 
 VM_NAME=openmp$CPU
-RESULTS=/home/oneadmin/results
+RESULTS=$PWD/Outputs/$Executable-$$
 
 
 # Create VM template
