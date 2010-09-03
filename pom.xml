@@ -84,6 +84,9 @@
 	  <url>http://opennebula.org/</url>
 	  <requires>
 	    <require>openmpi</require>
+ 	    <require>openmpi-devel</require>
+	    <require>lapack</require>
+            <require>lapack-devel</require>
 	  </requires>
 	  <needarch>x86_64</needarch>
 	  <description>

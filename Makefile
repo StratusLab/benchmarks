@@ -1,4 +1,4 @@
-SUBDIRS = cpu_intensive io-bonnie++  io-mpi   mpi-async  mpi-persistent  mpi-standard  mpi-sync  openmp-cg  openmp-jacobi  openmp-matrix  
+SUBDIRS = cpu_intensive  io-mpi   mpi-async  mpi-persistent  mpi-standard  mpi-sync  openmp-cg  openmp-jacobi  openmp-matrix  
 TARGETS= target
 all:
 	mkdir -p target/bin; mkdir -p target/scripts   

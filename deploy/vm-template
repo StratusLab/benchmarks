@@ -1,0 +1,16 @@
+NAME   = VMNAME
+CPU    = NBCPU
+VCPU   = NBVCPU
+MEMORY = TMEMORY
+DISK   = [
+    source   = "http://appliances.stratuslab.eu/images/base/sl-5.5-x86_64-base/2.0/sl-5.5-x86_64-base-2.0.img.tgz",
+    target   = "hda"]
+GRAPHICS = [
+  type    = "vnc",
+  listen  = "127.0.0.1"]
+NIC    = [ NETWORK = "public", BRIDGE  = "br0"]
+CONTEXT = [
+        files = "/home/oneadmin/scripts/init.sh /home/oneadmin/.ssh/id_rsa.pub",
+        target     = "hdc",
+        root_pubkey = "id_rsa.pub"
+]
