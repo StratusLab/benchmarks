@@ -107,7 +107,10 @@ function mpi_sshkey_copy()
 scp mpi_key.pub root@$1:/root/.ssh/
 ssh root@$1 cat /root/.ssh/mpi_key.pub \>\> /root/.ssh/authorized_keys
 }
-
+function mpi_env()
+{
+ssh root@$1 "echo export PATH=/usr/lib64/openmpi/1.4-gcc/bin:'$'PATH >> /root/.bashrc"
+}
 function clean()
 {
 onevm delete $1
@@ -124,5 +127,6 @@ echo "onevm delete $j"
 onevm delete $j
 echo "rm vm-template-$j"
 rm vm-template-$j
+sleep 10
 done
 }

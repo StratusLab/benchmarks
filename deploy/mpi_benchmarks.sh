@@ -118,7 +118,7 @@ let "FRONTEND_INDEX = 0"
 mpi_sshkey_gen ${IP_ARRAY[$FRONTEND_INDEX]} 
 
 copy_file ${IP_ARRAY[$FRONTEND_INDEX]} hostfile_$BENCHMARK_NAME
-
+mpi_env ${IP_ARRAY[$FRONTEND_INDEX]}
 stratuslab_repo ${IP_ARRAY[$FRONTEND_INDEX]}
 
 
@@ -126,6 +126,7 @@ for j in "${!IP_ARRAY[@]}"; do
 if [ $j != $FRONTEND_INDEX ]; then
 echo "Copying ssh key to ${IP_ARRAY[$j]}  Virtual Machine "
 mpi_sshkey_copy ${IP_ARRAY[$j]}
+mpi_env ${IP_ARRAY[$j]}
 stratuslab_repo ${IP_ARRAY[$j]}
 fi
 done
