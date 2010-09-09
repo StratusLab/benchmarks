@@ -42,14 +42,14 @@
 
 # OpenMP conjuguate gradient benchmark : 
 # We ask for a virtual machine with 3 VCPU, 3000 Mbytes RAM.
-# One the VM is running, set openmp threads to 5 and run openm-cg executable
+# Once the VM is running, set openmp threads to 5 and run openm-cg executable
 # Get outputs in XML format
  
 ./openmp_benchmarks.sh -e openmp-cg  -c 3 -m 3000 -n 5
 
 # OpenMP matrix multiplication benchmark : 
 # We ask for a virtual machine with 4 VCPU, 4000 Mbytes RAM.
-# One the VM is running, set openmp threads to 10 and run openm-matrix executable
+# Once the VM is running, set openmp threads to 10 and run openm-matrix executable
 # Get outputs in XML format
 
 
@@ -58,9 +58,9 @@
 
 
 
-# OpenMP matrix multiplication benchmark : 
+# OpenMP Jacobian Type iteration benchmark : 
 # We ask for a virtual machine with 5 VCPU, 5000 Mbytes RAM.
-# One the VM is running, set openmp threads to 15 and run openm-matrix executable
+# Once the VM is running, set openmp threads to 15 and run openm-matrix executable
 # Get outputs in XML format
 
 ./openmp_benchmarks.sh -e openmp-jacobi  -c 5 -m 5000 -n 15

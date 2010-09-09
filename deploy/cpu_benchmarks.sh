@@ -112,7 +112,7 @@ echo "retrieving $Executable  benchmark results"
 
 #clean
 
-clean $VM_NAME
+cleanall
 
 
 

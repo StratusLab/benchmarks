@@ -42,5 +42,5 @@
 # Once the VM is running, copy matrix_workflow.xml workflow file to the VM and  run kepler-nogui executable
 # Get outputs in XML format
  
-./kepler_benchmarks.sh -e kepler-nogui -c 5 -m 5000  -w ../scripts/workflows_bench/matrix_workflow.xml
+./kepler_benchmarks.sh -e kepler-nogui -c 5 -m 5000  -w /home/oneadmin/scripts/workflows_bench/matrix_workflow.xml
 

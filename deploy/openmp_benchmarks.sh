@@ -107,6 +107,6 @@ get_output ${IPADDRESS} $Executable $RESULTS
 
 #clean
 
-clean $VM_NAME
+cleanall
 
 

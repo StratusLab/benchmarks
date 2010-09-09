@@ -111,22 +111,3 @@ function mpi_env()
 {
 ssh root@$1 "echo export PATH=/usr/lib64/openmpi/1.4-gcc/bin:'$'PATH >> /root/.bashrc"
 }
-function clean()
-{
-onevm delete $1
-rm vm-template-$1
-}
-
-function mpi_clean()
-{
-echo "rm hostfile_$BENCHMARK_NAME"
-rm hostfile_$BENCHMARK_NAME
-rm mpi_key.pub
-for j in "${VMNAME_ARRAY[@]}"; do
-echo "onevm delete $j"
-onevm delete $j
-echo "rm vm-template-$j"
-rm vm-template-$j
-sleep 10
-done
-}

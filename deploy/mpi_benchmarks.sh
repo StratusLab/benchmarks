@@ -150,4 +150,4 @@ get_output ${IP_ARRAY[$FRONTEND_INDEX]} $Executable $RESULTS
 
 echo "clean" 
 
-mpi_clean
+cleanall

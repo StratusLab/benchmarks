@@ -1,34 +1,92 @@
-# Used for log messages
 SCRIPT_NAME=`basename $0`
 
-# Formats date for logs
-function log_date
+
+
+function clean()
 {
-    date +"%a %b %d %T %Y"
+onevm delete $VM_NAME
+rm vm-template-$VM_NAME
+sleep 10
+}
+function mpi_clean()
+{
+echo "rm hostfile_$BENCHMARK_NAME"
+rm hostfile_$BENCHMARK_NAME
+rm mpi_key.pub
+for j in "${VMNAME_ARRAY[@]}"; do
+echo "onevm delete $j"
+onevm delete $j
+echo "rm vm-template-$j"
+rm vm-template-$j
+done
+sleep 10
 }
 
-# Logs a message
+function cleanall()
+{
+if [ -e "hostfile_$BENCHMARK_NAME" ]; then
+mpi_clean
+else
+clean
+fi
+}
+
 function log
 {
     echo "$SCRIPT_NAME: $1"
 }
 
-# Logs an error message
 function log_error
 {
     log "ERROR: $1"
 }
 
-# This function is used to pass error message to the mad
 function error_message
 {
     (
-        echo "ERROR MESSAGE --8<------"
+        echo "ERROR MESSAGE --------"
         echo "$1"
-        echo "ERROR MESSAGE ------>8--"
+        echo "ERROR MESSAGE --------"
     ) 1>&2
 }
 
+
+
+function exec_and_log
+{
+    output=`$1 2>&1 1>/dev/null`
+    code=$?
+    if [ "x$code" != "x0" ]; then
+        log_error "Command \"$1\" failed."
+        log_error "$output"
+        error_message "$output"
+        exit $code
+    fi
+    log "Executed \"$1\"."
+}
+
+
+function execute()
+{
+    ret=`$1 2>&1 1>/dev/null`
+    check=$?
+    if [ "$check" != "0" ]; then
+        echo "$SCRIPT_NAME: ERROR : Command \"$1\" failed."
+        echo "$SCRIPT_NAME: ERROR : $ret"
+        echo "ERROR MESSAGE : $ret"
+        cleanall 
+        exit $check
+    fi
+    echo "Executed $SCRIPT_NAME: $1."
+}
+
+
+
+function logfile()
+{
+mkdir -p $2/Outputs/$1-$$
+exec > $2/Outputs/$1-$$/$1-$$.log 2>&1
+}
 
 function check_vm_status()
 {
@@ -95,7 +153,7 @@ IPADDRESS=`onevm show $1 | grep "IP" | cut -f2 -d"=" | cut -f1 -d","`
 function stratuslab_repo()
 {
 scp stratuslab.repo root@$1:/etc/yum.repos.d
-ssh root@$1 yum install -y  stratuslab-benchmarks
+execute "ssh root@$1 yum install -y  stratuslab-benchmarks"
 }
 
 function run_benchmarks()
@@ -106,17 +164,14 @@ ssh root@$1 $2 $3 $4 $5
 
 function get_output()
 {
-scp root@$1:/root/$2.xml $3
+mkdir -p $3
+execute "scp root@$1:/root/*.xml $3"
 }
 
 function copy_file()
 {
-scp $2 root@$1:
+execute "scp $2 root@$1:"
 }
 
-function clean()
-{
-onevm delete $1
-rm vm-template-$1
-}
+
 
