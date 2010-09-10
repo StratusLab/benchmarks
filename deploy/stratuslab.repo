@@ -1,0 +1,8 @@
+[StratusLab-Snapshots]
+name=StratusLab-Snapshots
+baseurl=http://yum.stratuslab.eu/snapshots/sl5
+
+[StratusLab-Releases]
+name=StratusLab-Releases
+baseurl=http://yum.stratuslab.eu/releases/sl5
+
