@@ -12,8 +12,8 @@
   <url>http://stratuslab.eu</url>
 
   <scm>
-    <connection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/testrep.git</connection>
-    <developerConnection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/testrep.git</developerConnection>
+    <connection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</connection>
+    <developerConnection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</developerConnection>
   </scm>
 
   <distributionManagement>
