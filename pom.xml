@@ -6,7 +6,7 @@
   <artifactId>benchmarks</artifactId>
   
   <packaging>rpm</packaging>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <name>StratusLab Benchmarks</name>
   <url>http://stratuslab.eu</url>
 
