@@ -4,29 +4,17 @@
   
   <groupId>eu.stratuslab.pkgs</groupId>
   <artifactId>benchmarks</artifactId>
-  
-  <packaging>rpm</packaging>
   <version>1.2-SNAPSHOT</version>
   <name>StratusLab Benchmarks</name>
-  <url>http://stratuslab.eu</url>
+  
+  <url>http://hudson.stratuslab.eu/authn</url>
 
-  <scm>
-    <connection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</connection>
-    <developerConnection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</developerConnection>
-  </scm>
+  <description>
+This project contains a set of application benchmarks to evaluate the
+performance of various cloud configurations. 
+</description>
 
-  <distributionManagement>
-    <repository>
-      <id>stratuslab.releases</id>
-      <name>Releases</name>
-      <url>http://repo.stratuslab.eu:8081/content/repositories/releases/</url>
-    </repository>
-    <snapshotRepository>
-      <id>stratuslab.snapshots</id>
-      <name>Snapshots</name>
-      <url>http://repo.stratuslab.eu:8081/content/repositories/snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
+  <packaging>rpm</packaging>
 
   <profiles>
     <profile>
@@ -54,6 +42,55 @@
     </profile>
     
   </profiles>
+
+  <properties>
+    <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
+    <RELEASE>0.${maven.build.timestamp}</RELEASE>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>StratusLab</name>
+    <url>http://stratuslab.eu/</url>
+  </organization>
+
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.stratuslab.eu:8080/</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>Hudson</system>
+    <url>http://hudson.stratuslab.eu:8080/</url>
+  </ciManagement>
+
+  <scm>
+    <connection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</connection>
+    <developerConnection>scm:git:ssh://apache@code.stratuslab.eu/ext/git/stratuslab-benchmarks.git</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>stratuslab.releases</id>
+      <name>Releases</name>
+      <url>http://repo.stratuslab.eu:8081/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>stratuslab.snapshots</id>
+      <name>Snapshots</name>
+      <url>http://repo.stratuslab.eu:8081/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <site>
+      <id>hudson.webserver</id>
+      <url>scp://hudson.stratuslab.eu/var/www/benchmarks</url>
+    </site>
+  </distributionManagement>
 
   <build>
 
@@ -252,9 +289,4 @@ the performance of virtualized resources using representative applications.
     </plugins>
   </build>
   
-  <properties>
-    <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
-    <RELEASE>0.${maven.build.timestamp}</RELEASE>
-  </properties>
-
 </project>
