@@ -1,6 +1,10 @@
 SUBDIRS = cpu_intensive  io-mpi   mpi-async  mpi-persistent  mpi-standard  mpi-sync  openmp-cg  openmp-jacobi  openmp-matrix  
 TARGETS= target
-all:
+
+check:
+	( which gcc && which mpif90 && which gfortran ) || false
+
+all: check
 	mkdir -p target/bin; mkdir -p target/scripts   
 	for i in $(SUBDIRS); do (cd $$i; make all; mv bin/* ../$(TARGETS)/bin); done
 	for i in $(SUBDIRS); do (cd $$i; cp scripts/* ../$(TARGETS)/scripts); done
