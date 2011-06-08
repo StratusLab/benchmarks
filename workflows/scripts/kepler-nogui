@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo "Usage /usr/bin/kepler-nogui.sh PATH/myWorkflow.xml"
+  echo "Usage /usr/bin/kepler-nogui PATH/myWorkflow.xml"
   exit -1
 fi
 
@@ -12,3 +12,4 @@ if [ -e $KEPLER_HOME/build.xml ]; then
 else
    echo "kepler build xml file doesn't exists"
    exit -1
+fi
