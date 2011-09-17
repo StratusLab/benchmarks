@@ -4,7 +4,7 @@
   
   <groupId>eu.stratuslab.pkgs</groupId>
   <artifactId>benchmarks</artifactId>
-  <version>1.8</version>
+  <version>1.9-SNAPSHOT</version>
   <name>StratusLab Benchmarks</name>
   
   <url>http://hudson.stratuslab.eu/authn</url>
