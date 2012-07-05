@@ -77,8 +77,8 @@ performance of various cloud configurations.
   </ciManagement>
 
   <scm>
-    <connection>git@github.com:StratusLab/authn.git</connection>
-    <developerConnection>git@github.com:StratusLab/authn.git</developerConnection>
+    <connection>scm:git:ssh://git@github.com/StratusLab/benchmarks.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/StratusLab/benchmarks.git</developerConnection>
   </scm>
 
   <distributionManagement>
