@@ -1,5 +1,7 @@
 language: java
 jdk:
   - openjdk6
-install: sudo apt-get install libopenmpi-dev openmpi-bin 
+install: sudo apt-get install libopenmpi-dev openmpi-bin rpm 
+script: mvn install
+
 
