@@ -4,6 +4,9 @@ Benchmarks
 This repository contains application-level benchmarks for determining
 the performance of StratusLab cloud installations.
 
+**These benchmarks are no longer maintained and will not be included
+in future releases of the StratusLab cloud distribution.**
+
 License
 -------
 
